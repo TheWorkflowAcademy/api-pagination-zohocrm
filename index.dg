@@ -1,11 +1,8 @@
-// CONFIG: Name of Zoho CRM API Connection
-zohoCrmConnection = "YOUR_ZOHO_CRM_CONNECTION_NAME";
-
 // CONFIG: Name of Zoho CRM record module (Contacts, Leads, Custom Modules, etc.)
-zohoCrmModule = "ZOHO_CRM_MODULE";
+zohoCrmModule = "CRM_MODULE_NAME";
 
 // CONFIG: Number of results to return per page. DO NOT exceed the per_page limit of your API, or this function will not perform correctly.
-perPage = 200;
+perPageLimit = 200;
 
 // List of page numbers. This should start with '1' and be much longer than the expected number of pages.
 pageIterationList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
@@ -23,10 +20,11 @@ for each page in pageIterationList {
 	if(iterationComplete == false) {
 		
 		// Get records from Zoho CRM API.
+		// CONFIG: Name of Zoho CRM API Connection
 		response = invokeurl [
-			url: "https://www.zohoapis.com/crm/v2/" + zohoCrmModule + "?page=" + page + "&per_page=" + perPage
+			url: "https://www.zohoapis.com/crm/v2/" + zohoCrmModule + "?page=" + page + "&per_page=" + perPageLimit
 			type: GET
-			connection: zohoCrmConnection
+			connection: "ZOHO_CRM_CONNECTION_NAME"
 		];
 		
 		// Get records from API response. Add them to allRecords list.
@@ -34,7 +32,7 @@ for each page in pageIterationList {
 		allRecords.addAll(records);
 		
 		// Update 'while' condition status
-		if(records.size() < perPage) {
+		if(records.size() < perPageLimit) {
 			iterationComplete = true;
 		}
 	}

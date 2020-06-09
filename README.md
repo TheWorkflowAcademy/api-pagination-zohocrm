@@ -11,9 +11,9 @@ Deluge does not have native support for API pagination or `while`loops, which is
 
 ## Configuration
 Before you can use this script with Zoho CRM, you must specify the following in the script:
-1. Configured Zoho CRM Connection (see below)
-2. Zoho CRM module you wish to query (e.g. "Contacts", "Deals", etc.)
-3. Number of API page results you wish to get per request. The limit for the Zoho CRM API is 200. DO NOT exceed the per page limit, or else this script will not work.
+1. Configured Zoho CRM Connection. Update the value for `connection` in the `invokeurl` method.
+2. Zoho CRM module you wish to query (e.g. "Contacts", "Deals", etc). Update the `zohoCrmModule` variable.
+3. Number of API page results you wish to get per request. The limit for the Zoho CRM API is 200. DO NOT exceed the per page limit, or else this script will not work. Update the `perPageLimit` variable.
 
 ### Zoho CRM Connection
 In order to call the Zoho CRM API within a Deluge Script, you must first create a connection to it.
