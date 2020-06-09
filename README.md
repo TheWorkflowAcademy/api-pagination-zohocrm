@@ -53,7 +53,7 @@ for each page in pageIterationList {
 ### Making API Request and `iterationComplete`
 The API request will then be executed and manipulated into the `records` variable which will only contain the current requested records. The `records` will be subsequently added to the `allRecords` list which will contain the accumulation of all API requests.
 
-Since the `for each` process is emulating a `while` loop we need set our `iterationComplete` variable. We will set `iterationComplete` only when the the **number of results on a page is less than** our APIs `per_page` limit. 
+Since the `for each` process is emulating a `while` loop we need set our `iterationComplete` variable. We will set `iterationComplete` to `true` only when the the **number of results on a page is less than** our APIs `per_page` limit. 
 
 ```
 ...
