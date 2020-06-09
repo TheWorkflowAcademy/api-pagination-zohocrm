@@ -1,0 +1,38 @@
+// List of page numbers. This should start with '1' and be much longer than the expected number of pages.
+pageList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+
+// Number of results to return per page. DO NOT exceed the per_page limit of your API, or this function will not perform correctly.
+perPage = 200;
+
+// List to accumulate all of your contacts
+allContacts = List();
+
+// 'while' condition for evaluation. While this is 'false', the API requests will continue. 
+allContactsFound = false;
+
+// Loop over each page in the page list
+for each page in pageList {
+	
+	// Evaluate 'while' condition is satisfied
+	if(allContactsFound == false) {
+		
+		// Get Contacts from Zoho CRM API. You must have previously created a connection for Zoho CRM.
+		response = invokeurl [
+			url: "https://www.zohoapis.com/crm/v2/Contacts?page=" + page + "&per_page=" + perPage
+			type: GET
+			connection: "zohocrm"
+		];
+		
+		// Get contacts from API response. Add them to allContacts list.
+		contacts = response.get("data");
+		allContacts.addAll(contacts);
+		
+		// Update 'while' condition status
+		if(contacts.size() < perPage) {
+			allContactsFound = true;
+		}
+	}
+}
+
+// Check for correctness
+info "Number of Contacts: " + allContacts.size();
