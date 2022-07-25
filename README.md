@@ -53,7 +53,7 @@ for each page in pageIterationList {
 ### Making API Request and `iterationComplete`
 The API request will then be executed and manipulated into the `records` variable which will only contain the current requested records. The `records` will be subsequently added to the `allRecords` list which will contain the accumulation of all API requests.
 
-Since the `for each` process is emulating a `while` loop we need set our `iterationComplete` variable. We will set `iterationComplete` to `true` only when the the **number of results on a page is less than** our APIs `per_page` limit. 
+Since the `for each` process is emulating a `while` loop we need set our `iterationComplete` variable. We will set `iterationComplete` to `true` only when there are no more records as indicated by the `more_records` parameter in the response.
 
 ```
 ...
@@ -74,7 +74,7 @@ for each page in pageIterationList {
 		records = response.get("data");
 		allRecords.addAll(records);
 		
-		if(records.size() < perPage) {
+		if(response.get("info").get("more_records") == false) {
 			iterationComplete = true;
 		}
 	}
