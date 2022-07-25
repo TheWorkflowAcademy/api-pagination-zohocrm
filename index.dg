@@ -32,7 +32,7 @@ for each page in pageIterationList {
 		allRecords.addAll(records);
 		
 		// Update 'while' condition status
-		if(records.size() < perPageLimit) {
+		if(response.get("info").get("more_records") == false) {
 			iterationComplete = true;
 		}
 	}
